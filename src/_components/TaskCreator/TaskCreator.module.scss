@@ -1,0 +1,18 @@
+.TaskCreator {
+    width: 100%;
+    padding: 20px 15px;
+}
+
+.CreatorBox {
+
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    padding: 25px 20px 20px;
+    box-shadow: 0px 5px 20px 1px rgba(0,0,0,0.75);
+
+    
+}

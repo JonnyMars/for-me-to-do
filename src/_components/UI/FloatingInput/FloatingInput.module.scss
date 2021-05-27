@@ -1,0 +1,56 @@
+// https://www.cssscript.com/demo/animated-floating-input-placeholder/
+
+
+.FloatingInput {
+    position: relative;
+    width: 100%;
+}
+
+.Input {
+
+    font-weight: 500;
+    font-size: 1.6rem;
+    color: var(--black);
+    width: 100%;
+    padding: 12px 15px;
+    border: none;
+    border-bottom: 4px solid var(--blue);
+    outline:none;
+
+    &::placeholder {
+        color: transparent;
+    }
+
+    &:focus + .Label,
+    &:not(:placeholder-shown) + .Label {
+        transform: scale(0.8) translate(-20px, -35px);
+        color: var(--black);
+    }
+
+    &:focus {
+        border-color: yellow;
+
+        & + .Label {
+        }
+    }
+
+
+
+}
+
+.Label {
+    position: absolute;
+    margin: 10px 0;
+    padding: 0 4px;
+    color:  var(--grey);
+    display: flex;
+    align-items: center;
+    font-size: 1.6rem;
+    top: 0;
+    left: 17px;
+    transition: all 0.2s;
+    transform-origin: 0% 0%;
+    background: none;
+    pointer-events: none;
+    font-weight: bold;
+}

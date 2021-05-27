@@ -1,10 +1,11 @@
+import Tasks from "./_containers/Tasks/Tasks";
 import Layout from "./_hoc/Layout/Layout";
 
 function App() {
   return (
     <div className="App">
       <Layout>
-        We're up and running!
+        <Tasks />
       </Layout>
     </div>
   );
