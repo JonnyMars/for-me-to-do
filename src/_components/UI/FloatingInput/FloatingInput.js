@@ -6,7 +6,7 @@ export default function FloatingInput(props) {
 
     return ( 
         <div className={styles.FloatingInput}>
-            <input className={styles.Input} name="input name" placeholder={props.placeholder} value={props.value} onChange={props.change} />
+            <input className={styles.Input} autoComplete="off" name="input name" placeholder={props.placeholder} value={props.value} onChange={props.change} />
             <label className={styles.Label}>
                 {props.placeholder}
             </label>

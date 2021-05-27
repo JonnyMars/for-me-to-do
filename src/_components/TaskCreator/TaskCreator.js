@@ -9,6 +9,7 @@ export default function TaskCreator(props) {
 
     function newTaskHandler(e) {
         e.preventDefault();
+        props.addTask(taskValue);
         setTaskValue("");
     }
 
