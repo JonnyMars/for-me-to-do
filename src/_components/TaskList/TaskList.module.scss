@@ -1,0 +1,12 @@
+.TaskList {
+    width: 100%;
+    background-color: var(--orange);
+    padding: 15px var(--list-container-side-padding);
+    padding-top: 100px;
+    margin-top: -75px;
+}
+
+.List {
+    max-width: var(--list-max-width);
+    width: 100%;
+}

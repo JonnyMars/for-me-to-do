@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import TaskCreator from '../../_components/TaskCreator/TaskCreator';
+import TaskList from '../../_components/TaskList/TaskList';
 import styles from "./Tasks.module.scss";
 
 export default function Tasks() {
@@ -21,6 +22,7 @@ export default function Tasks() {
     return (
         <div className={styles.Tasks}>
             <TaskCreator addTask={addTaskHandler}  />
+            <TaskList tasks={tasks} />
         </div>
     )
 }

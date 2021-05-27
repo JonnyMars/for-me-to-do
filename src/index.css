@@ -9,6 +9,9 @@
   --grey: #BEBEBE;
   
   /* UI */
+  --list-max-width: 800px;
+  --list-container-side-padding: 15px;
+
   --error-red: #CC0000;
   --border-radius: 10px;
 
