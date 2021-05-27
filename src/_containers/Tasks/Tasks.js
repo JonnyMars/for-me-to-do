@@ -5,12 +5,19 @@ import styles from "./Tasks.module.scss";
 
 export default function Tasks() {
 
-    const [tasks, setTasks] = useState([]);
+    const [tasks, setTasks] = useState([
+        {
+            title: "task",
+            status: "completed",
+            id: new Date()
+        }
+    ]);
 
     function addTaskHandler(task) {
         setTasks((prevState) => (
             [...prevState, {
                 title: task,
+                status: "active",
                 id: new Date()
             }]
         ))

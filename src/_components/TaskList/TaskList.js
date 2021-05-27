@@ -1,17 +1,17 @@
 import React from 'react'
-import TaskItem from './TaskItem/TaskItem';
+import ActiveList from './ActiveList/ActiveList';
+import CompletedList from './CompletedList/CompletedList';
 import styles from "./TaskList.module.scss";
 
 export default function TaskList(props) {
+
+    const active_tasks = props.tasks.filter(task => task.status === "active");
+    const completed_tasks = props.tasks.filter(task => task.status === "completed");
+
     return (
-        <section className={`${styles.TaskList} flex flex-center`}>
-            <div className={styles.List}>
-                {
-                    props.tasks.map(task => (
-                        <TaskItem task={task} />
-                    ))
-                } 
-            </div>
+        <section className={`${styles.TaskList} flex`}>
+            <ActiveList tasks={active_tasks} />
+            <CompletedList tasks={completed_tasks} />
         </section>
     )
 }

@@ -1,0 +1,21 @@
+.CompletedList {
+    width: 100%;
+    max-width: var(--list-max-width);
+    margin: 50px auto 0;
+}
+
+.Accordion {
+    background-color: var(--white);
+    border: none;
+    font-size: var(--header);
+    padding: 10px 15px;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 5px;
+    cursor: pointer;
+    border-radius: var(--border-radius);
+
+    span {
+        font-weight: bold;
+    }
+}

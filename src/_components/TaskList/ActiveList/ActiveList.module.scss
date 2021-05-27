@@ -1,0 +1,13 @@
+.ActiveList {
+    width: 100%;
+    max-width: var(--list-max-width);
+    margin: 0 auto;
+}
+
+.NoTasksMessage {
+    font-size: var(--header);
+    font-weight: bold;
+    width: 100%;
+    text-align: center;
+    margin-top: 0;
+}
