@@ -1,0 +1,80 @@
+$button-width-height: 40px;
+$stroke-width: 6px;
+$svg-blue: "%23389FAE"; //%23 === #
+
+.ListActionButton {
+    width: $button-width-height;
+    height: $button-width-height;
+    position: relative;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    -webkit-appearance: none;
+
+    & + .ListActionButton {
+        margin-left: 10px;
+    }
+}
+
+.Cross {
+    
+    &::before, &::after {
+        position: absolute;
+        left: #{($button-width-height / 2) - $stroke-width};
+        content: ' ';
+        height: 100%;
+        width: $stroke-width;
+        background-color: red;
+        top: 0;
+    }
+
+    &::before {
+        transform: rotate(45deg);
+    }
+    
+    &::after {
+        transform: rotate(-45deg);
+    }
+
+}
+
+
+.Tick {
+
+
+    &::after {
+        content: '';
+
+        height: #{$button-width-height * .8};
+        width: #{($button-width-height / 2) * .8};
+        -webkit-transform-origin: left top;
+        transform-origin: left top;
+        border-right: $stroke-width solid #5cb85c;
+        border-top: $stroke-width solid #5cb85c;
+        left: 0;
+        top: #{$button-width-height / 2};
+        position: absolute;
+        transform: scaleX(-1) rotate(135deg);
+    }
+
+
+}
+
+.UpArrow {
+
+    background-image: url('data:image/svg+xml;utf8,<svg width="28" height="33" viewBox="0 0 28 33" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M12 7H16V33H12V7Z" fill="#{$svg-blue}"/> <path d="M10.4623 3.6676L13.9978 0.132065L27.4329 13.5671L23.8973 17.1026L10.4623 3.6676Z" fill="#{$svg-blue}"/> <path d="M0.568085 13.5681L4.10362 17.1037L17.5386 3.66863L14.0031 0.133099L0.568085 13.5681Z" fill="#{$svg-blue}"/> </svg>');
+
+}
+
+.Chevron {
+
+    background-image: url('data:image/svg+xml;utf8,<svg width="27" height="17" viewBox="0 0 27 17" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M9.89417 3.53553L13.4297 0L26.8647 13.435L23.3292 16.9706L9.89417 3.53553Z" fill="#{$svg-blue}"/> <path d="M0 13.436L3.53553 16.9716L16.9706 3.53655L13.435 0.00101924L0 13.436Z" fill="#{$svg-blue}"/> </svg>');
+
+}
+
+.UpArrow, .Chevron {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}

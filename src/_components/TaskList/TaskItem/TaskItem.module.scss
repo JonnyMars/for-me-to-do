@@ -5,4 +5,14 @@
     padding: 10px 15px;
     margin-bottom: 10px;
     border-radius: var(--border-radius);
+    align-items: center;
+    justify-content: space-between;
+}
+
+.Title {
+    margin: 0;
+}
+
+.Actions {
+    margin-left: 20px;
 }
