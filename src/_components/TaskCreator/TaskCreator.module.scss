@@ -1,6 +1,7 @@
 .TaskCreator {
     width: 100%;
     padding: 20px var(--list-container-side-padding);
+    background-color: var(--white);
 }
 
 .CreatorBox {
@@ -15,4 +16,14 @@
     padding: 25px 20px 20px;
 
     
+}
+
+.CharCounter {
+
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    z-index: 10;
+    font-weight: bold;
+
 }
