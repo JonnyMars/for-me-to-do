@@ -12,10 +12,16 @@
     width: 100%;
     text-align: left;
     margin-bottom: 5px;
-    cursor: pointer;
     border-radius: var(--border-radius);
+
+    justify-content: space-between;
+    align-items: center;
 
     span {
         font-weight: bold;
     }
+}
+
+.ChevronRotate {
+    transform: rotate(180deg)
 }

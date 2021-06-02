@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import ListActionButton from '../../UI/ListActionButton/ListActionButton';
 import TaskItem from '../TaskItem/TaskItem';
 import styles from "./CompletedList.module.scss";
 
@@ -12,6 +13,8 @@ export default function CompletedList(props) {
         console.log("click");
     }
 
+    console.log(accordionOpen)
+
     if(props.tasks.length === 0) return null;
 
     let taskList = null
@@ -20,9 +23,12 @@ export default function CompletedList(props) {
 
     return (
         <div className={styles.CompletedList}>
-            <button className={styles.Accordion} onClick={accordionClickHandler}>
-                Completed Tasks <span>({props.tasks.length})</span>
-            </button>
+            <div className={`${styles.Accordion} flex`}>
+                <span>
+                    Completed Tasks <span>({props.tasks.length})</span>
+                </span>
+                <ListActionButton type="CHEVRON" clicked={accordionClickHandler} extraClasses={accordionOpen ? "" : styles.ChevronRotate} />
+            </div>
             <div className={styles.List}>
                 {taskList}
             </div>

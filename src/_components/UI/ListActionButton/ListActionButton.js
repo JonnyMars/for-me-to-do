@@ -22,11 +22,14 @@ export default function ListActionButton(props) {
             return null;
     }
 
+    const extraClasses = props.extraClasses ? props.extraClasses : ""
+    const classes = [styles.ListActionButton, appropriate_class].join(" ") + ` ${extraClasses}`;
+
 
     return (
         <button 
-            className={[styles.ListActionButton, appropriate_class].join(" ")} 
-            onClick={props.click} 
+            className={classes} 
+            onClick={props.clicked} 
             title={props.title ? props.title : ""}
         >
         </button>

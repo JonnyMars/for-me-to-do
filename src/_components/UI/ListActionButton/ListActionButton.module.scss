@@ -69,6 +69,7 @@ $svg-blue: "%23389FAE"; //%23 === #
 
 .Chevron {
 
+    transition: transform ease-out .15s;
     background-image: url('data:image/svg+xml;utf8,<svg width="27" height="17" viewBox="0 0 27 17" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M9.89417 3.53553L13.4297 0L26.8647 13.435L23.3292 16.9706L9.89417 3.53553Z" fill="#{$svg-blue}"/> <path d="M0 13.436L3.53553 16.9716L16.9706 3.53655L13.435 0.00101924L0 13.436Z" fill="#{$svg-blue}"/> </svg>');
 
 }
