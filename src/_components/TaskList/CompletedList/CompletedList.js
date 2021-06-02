@@ -10,16 +10,13 @@ export default function CompletedList(props) {
     function accordionClickHandler(e) {
         e.preventDefault();
         setAccordionOpen(!accordionOpen)
-        console.log("click");
     }
-
-    console.log(accordionOpen)
 
     if(props.tasks.length === 0) return null;
 
     let taskList = null
 
-    if(accordionOpen) taskList = props.tasks.map(task => <TaskItem key={task.id} task={task} />)
+    if(accordionOpen) taskList = props.tasks.map(task => <TaskItem key={task.id} task={task} delete={props.delete} uncomplete={props.uncomplete} />)
 
     return (
         <div className={styles.CompletedList}>

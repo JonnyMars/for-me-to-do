@@ -29,7 +29,7 @@ export default function Tasks() {
     return (
         <div className={styles.Tasks}>
             <TaskCreator addTask={addTaskHandler}  />
-            <TaskList tasks={tasks} />
+            <TaskList tasks={tasks} setTasks={setTasks} />
         </div>
     )
 }
