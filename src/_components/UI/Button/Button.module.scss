@@ -5,6 +5,10 @@
     border: none;
     font-size: 1.25em;
     cursor: pointer;
+
+    &[disabled] {
+        background-color: var(--grey);
+    }
 }
 
 .Default {

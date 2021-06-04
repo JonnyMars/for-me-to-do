@@ -1,0 +1,43 @@
+.Input {
+    width: 100%;
+    margin-bottom: 20px;
+
+    label {
+        font-size: 1.25em;
+        color: var(--black);
+        width: 100%;
+        font-weight: bold;
+        text-align: left;
+        margin-bottom: 10px;
+        display: block;
+    }
+
+}
+
+input {
+
+    
+
+    
+    &.InputElement {
+        width: 100%;
+        border: thin solid var(--yellow);
+        font-size: 1.1em;
+        padding: 10px;
+        border-radius: var(--border-radius);
+
+        &:focus {
+            outline: none;
+            border: thin dashed var(--blue);
+        }
+    }
+    &.Invalid {
+        border-color: var(--error-red) !important;
+        background-color: var(--error-red-light);
+
+        &:focus {
+            border-style: solid;
+        }
+    }
+
+}

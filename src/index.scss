@@ -13,11 +13,28 @@
   --list-container-side-padding: 15px;
 
   --error-red: #CC0000;
+  --error-red-light:#f78686; 
   --border-radius: 10px;
 
   /* Fonts */
   --header: 1.5em;
   
+}
+
+@mixin up-to-mobile {
+  @media screen and (max-width: 425px) {
+    @content;
+  }
+}
+@mixin up-to-tablet {
+  @media screen and (max-width: 767px) {
+    @content;
+  }
+}
+@mixin up-to-desktop {
+  @media screen and (max-width: 991px) {
+    @content;
+  }
 }
 
 * {

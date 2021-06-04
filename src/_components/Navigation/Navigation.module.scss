@@ -31,3 +31,14 @@
 
     }
 }
+
+.LoginButton {
+    padding: 10px 25px;
+    border-radius: var(--border-radius);
+    color: var(--white);
+    border: none;
+    font-size: 1.25em;
+    cursor: pointer;
+    background-color: var(--blue);
+    text-decoration: none;
+}

@@ -31,7 +31,13 @@ export default function TaskCreator(props) {
             <div className={styles.CreatorBox} >
                 {charCounter}
                 <form onSubmit={newTaskHandler} >
-                    <FloatingInput placeholder="I need to..." value={taskValue} change={onTaskValueChange}  />
+                    <FloatingInput 
+                        placeholder="I need to..." 
+                        value={taskValue} 
+                        change={onTaskValueChange} 
+                        inputname="new-task"
+                        autoComplete="off"
+                    />
                 </form>
             </div>
         </section>

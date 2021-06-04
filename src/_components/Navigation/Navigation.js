@@ -1,26 +1,21 @@
 import React from 'react'
-import Button from '../UI/Button/Button';
+import { Link } from 'react-router-dom';
 import styles from "./Navigation.module.scss";
 
 
 export default function Navigation(props) {
 
-    function onLogin() {
-        console.log("Login")
-    }
-
-
-    const actionBtn = <Button clicked={onLogin} >Login</Button>
+    const actionBtn = <Link to="login" className={styles.LoginButton}>Login</Link>
 
     return (
         <nav className={`${styles.Navigation} full-width`}>
             <div className={`container flex ${styles.Container}`}>
-                <a className={styles.Logo} href="/">
+                <Link className={styles.Logo} to="/">
                     <span>For</span>
                     <span>Me</span>
                     <span>To</span>
                     <span>Do</span>
-                </a>
+                </Link>
                 {actionBtn}
             </div>
         </nav>
