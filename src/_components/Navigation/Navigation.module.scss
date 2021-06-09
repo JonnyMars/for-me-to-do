@@ -32,13 +32,18 @@
     }
 }
 
-.LoginButton {
+.Button {
     padding: 10px 25px;
     border-radius: var(--border-radius);
     color: var(--white);
     border: none;
     font-size: 1.25em;
     cursor: pointer;
-    background-color: var(--blue);
+    background-color: var(--green);
     text-decoration: none;
+    
+    &.SignUpButton {
+        background-color: var(--blue);
+        margin-right: 10px;
+    }
 }

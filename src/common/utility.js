@@ -1,3 +1,37 @@
+export const authFormInitialState = {
+    email: {
+        elementType: "input",
+        label: "Your Email Address",
+        elementConfig: {
+            type: "email",
+            placeholder: "Email"
+        },
+        value: "",
+        validation: {
+            required: true,
+            isEmail: true
+        },
+        valid: false,
+        touched: false
+    },
+    password: {
+        elementType: "input",
+        label: "Your Password",
+        elementConfig: {
+            type: "password",
+            placeholder: "Password"
+        },
+        value: "",
+        validation: {
+            required: true,
+            minLength: 6
+        },
+        valid: false,
+        touched: false
+    }
+}
+
+
 export function checkValidity(value, rules) {
 
     let isValid = true;

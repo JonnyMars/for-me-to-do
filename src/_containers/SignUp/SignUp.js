@@ -1,27 +1,26 @@
 import React, { useState } from 'react'
 import { checkValidity, authFormInitialState } from '../../common/utility';
 import AuthForm from '../../_components/AuthForm/AuthForm';
-import styles from "./Login.module.scss";
+import styles from "./SignUp.module.scss";
 
 
 
-export default function Login() {
-
-
-    const [loginFormConfig, setLoginFormConfig] = useState({...authFormInitialState})
+export default function SignUp() {
+    
+    const [signupFormConfig, setSignupFormConfig] = useState({...authFormInitialState})
 
 
     function inputChangedHandler(e, controlName) {
-        const updatedConfig = {...loginFormConfig};
+        const updatedConfig = {...signupFormConfig};
         updatedConfig[controlName].value = e.target.value;
         updatedConfig[controlName].valid = checkValidity(e.target.value, updatedConfig[controlName].validation);
-        setLoginFormConfig(updatedConfig);
+        setSignupFormConfig(updatedConfig);
     }
 
     function inputBlurHandler(e, controlName) {
-        const updatedConfig = {...loginFormConfig};
+        const updatedConfig = {...signupFormConfig};
         updatedConfig[controlName].touched = e.target.value.length > 0;
-        setLoginFormConfig(updatedConfig);
+        setSignupFormConfig(updatedConfig);
     }
 
 
@@ -32,12 +31,12 @@ export default function Login() {
 
 
 
-    const loginFormElementsArray = [];
+    const signupFormElementsArray = [];
 
-    for(let key in loginFormConfig) {
-        loginFormElementsArray.push({
+    for(let key in signupFormConfig) {
+        signupFormElementsArray.push({
             id: key,
-            config: loginFormConfig[key]
+            config: signupFormConfig[key]
         })
     }
 
@@ -46,10 +45,10 @@ export default function Login() {
     return (
         <div className={`container flex flex-center`}>
             <AuthForm
-                formTitle="Log In"
-                buttonText="Log In"
+                formTitle="Sign Up"
+                buttonText="Sign Up"
                 submit={submitHandler}
-                formElements={loginFormElementsArray}
+                formElements={signupFormElementsArray}
                 change={inputChangedHandler}
                 blur={inputBlurHandler}
             />

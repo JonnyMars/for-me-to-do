@@ -5,7 +5,8 @@ import styles from "./Navigation.module.scss";
 
 export default function Navigation(props) {
 
-    const actionBtn = <Link to="login" className={styles.LoginButton}>Login</Link>
+    const signupBtn = <Link to="signup" className={[styles.Button, styles.SignUpButton].join(" ")}>Sign Up</Link>
+    const loginBtn = <Link to="login" className={styles.Button}>Login</Link>
 
     return (
         <nav className={`${styles.Navigation} full-width`}>
@@ -16,7 +17,10 @@ export default function Navigation(props) {
                     <span>To</span>
                     <span>Do</span>
                 </Link>
-                {actionBtn}
+                <div>
+                    {signupBtn}
+                    {loginBtn}
+                </div>
             </div>
         </nav>
     )
