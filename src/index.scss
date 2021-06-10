@@ -21,21 +21,6 @@
   
 }
 
-@mixin up-to-mobile {
-  @media screen and (max-width: 425px) {
-    @content;
-  }
-}
-@mixin up-to-tablet {
-  @media screen and (max-width: 767px) {
-    @content;
-  }
-}
-@mixin up-to-desktop {
-  @media screen and (max-width: 991px) {
-    @content;
-  }
-}
 
 * {
   font-family: 'Quicksand', sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -48,9 +33,6 @@
 body {
   margin: 0;
 }
-
-
-
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',

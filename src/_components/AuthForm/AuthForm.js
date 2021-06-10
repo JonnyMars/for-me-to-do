@@ -10,7 +10,6 @@ export default function AuthForm(props) {
     const validFormElements = props.formElements.filter(formElement => formElement.config.valid === true);
 
     if(validFormElements.length === props.formElements.length) allValid = true;
-
     
     return (
         <div className={`${styles.AuthForm} container`}>
@@ -23,7 +22,7 @@ export default function AuthForm(props) {
                         elementConfig={formElement.config.elementConfig}
                         elementLabel={formElement.config.label}
                         value={formElement.config.value}
-                        change={(e) => props.change(e, formElement.id)}
+                        change={(e) => props.change(e, formElement.id, props.type)}
                         shouldValidate={formElement.config.validation}
                         valid={formElement.config.valid}
                         touched={formElement.config.touched}
