@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { checkValidity, authFormInitialState } from '../../common/utility';
+import { useHistory } from 'react-router';
+import { checkValidity, authFormInitialState, FIREBASE_WEB_KEY } from '../../common/utility';
 import AuthForm from '../../_components/AuthForm/AuthForm';
 import styles from "./Auth.module.scss";
 
@@ -10,7 +11,7 @@ export default function Login() {
 
     const [loginFormConfig, setLoginFormConfig] = useState(JSON.parse(JSON.stringify(authFormInitialState)))
     const [signupFormConfig, setSignupFormConfig] = useState(JSON.parse(JSON.stringify(authFormInitialState)))
-
+    const history = useHistory();
 
     function inputChangedHandler(e, controlName, type) {
 
@@ -51,6 +52,26 @@ export default function Login() {
     function signupSubmitHandler(e) {
         e.preventDefault();
         console.log("Signup Submit")
+
+        fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${FIREBASE_WEB_KEY}`,{
+            method: "POST",
+            body: JSON.stringify({
+                "email": signupFormConfig.email.value,
+                "password": signupFormConfig.password.value,
+                "returnSecureToken": true
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            history.push("/tasks");
+            // Come back to this
+            if(data.error) alert(data.error.message);
+        })
+        .catch(error => {
+            console.log(`Error:`, error);
+        })
+
     }
 
 

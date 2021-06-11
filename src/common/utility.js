@@ -1,3 +1,5 @@
+export const FIREBASE_WEB_KEY = `AIzaSyBqma4UGNbC2yo_KkJN9yklhALa_X8CEWQ`;
+
 export const authFormInitialState = {
     email: {
         elementType: "input",
