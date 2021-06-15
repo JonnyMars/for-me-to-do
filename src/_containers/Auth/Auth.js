@@ -15,7 +15,7 @@ export default function Login() {
     const [formError, setFormError] = useState(null);
 
 
-    // const history = useHistory();
+    const history = useHistory();
     const {signUp, logIn} = useAuth();
 
     function inputChangedHandler(e, controlName, type) {
@@ -60,6 +60,7 @@ export default function Login() {
                 console.log(data);
 
                 if(data.error) setFormError(data.error.message)
+                if(!data.error) history.push("/tasks");
             },
             onFail: error => {
                 setFormError(error.toString())
@@ -76,7 +77,8 @@ export default function Login() {
             onSuccess: data => {
                 console.log(data);
 
-                if(data.error) setFormError(data.error.message)
+                if(data.error) setFormError(data.error.message);
+                if(!data.error) history.push("/tasks");
             },
             onFail: error => {
                 setFormError(error.toString())

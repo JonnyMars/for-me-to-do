@@ -1,4 +1,4 @@
-import { Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import Tasks from "./_containers/Tasks/Tasks";
 import Layout from "./_hoc/Layout/Layout";
 import Auth from "./_containers/Auth/Auth";
@@ -11,14 +11,15 @@ function App() {
 
   useEffect(() => {
     authCheckState();
-  }, [])
-
+  }, [authCheckState])
+  
   return (
     <div className="App">
       <Layout>
         <Switch>
-          <Route path="/tasks" component={Tasks} />
           <Route path={["/login", "/signup"]} component={Auth} />
+          <Route path="/tasks" component={Tasks} />
+          <Route render={() => <Redirect to="/" />} />
         </Switch>
       </Layout>
     </div>

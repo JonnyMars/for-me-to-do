@@ -2,9 +2,12 @@ import React, { useState } from 'react'
 import TaskCreator from '../../_components/TaskCreator/TaskCreator';
 import TaskList from '../../_components/TaskList/TaskList';
 import styles from "./Tasks.module.scss";
+import useAuth from "../../hooks/useAuth";
+import { Redirect } from 'react-router-dom';
 
 export default function Tasks() {
 
+    const {isAuthenticated} = useAuth();
     const [tasks, setTasks] = useState([
         {
             title: "task",
@@ -23,7 +26,10 @@ export default function Tasks() {
         ))
     }
 
-    console.log(tasks)
+
+    if(!isAuthenticated()) {
+        return <Redirect to="/" />
+    }
 
 
     return (

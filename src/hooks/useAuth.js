@@ -10,7 +10,8 @@ export default function useAuth() {
         signUp: signUp,
         logIn: logIn,
         logOut: logOut,
-        authCheckState: authCheckState
+        authCheckState: authCheckState,
+        isAuthenticated: isAuthenticated
     }
 
 }
@@ -97,6 +98,18 @@ function authCheckState() {
 
     }
 
+}
+
+function isAuthenticated() {
+
+    const token = window.localStorage.getItem(FIREBASE_ID_TOKEN);
+    const userId = window.localStorage.getItem(FIREBASE_UID_TOKEN);
+    let expirationDate = window.localStorage.getItem(FIREBASE_EXPIRY_TIME);
+
+    if(!token || !userId || !expirationDate) return false
+    
+    return true;
+    
 }
 
 function checkAuthTimeout(expirationTime) {
