@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router';
-import { checkValidity, authFormInitialState, FIREBASE_WEB_KEY } from '../../common/utility';
+import { checkValidity, authFormInitialState } from '../../common/utility';
+import useAuth from '../../hooks/useAuth';
 import AuthForm from '../../_components/AuthForm/AuthForm';
 import styles from "./Auth.module.scss";
-
 
 
 export default function Login() {
@@ -11,7 +11,8 @@ export default function Login() {
 
     const [loginFormConfig, setLoginFormConfig] = useState(JSON.parse(JSON.stringify(authFormInitialState)))
     const [signupFormConfig, setSignupFormConfig] = useState(JSON.parse(JSON.stringify(authFormInitialState)))
-    const history = useHistory();
+    // const history = useHistory();
+    const {signUp, logIn} = useAuth();
 
     function inputChangedHandler(e, controlName, type) {
 
@@ -47,29 +48,31 @@ export default function Login() {
 
     function loginSubmitHandler(e) {
         e.preventDefault();
-        console.log("Login Submit")
+
+        logIn({
+            email: loginFormConfig.email.value,
+            password: loginFormConfig.password.value,
+            onSuccess: data => {
+                console.log(data);
+            },
+            onFail: error => {
+                console.log(error);
+            }
+        })
+
     }
     function signupSubmitHandler(e) {
         e.preventDefault();
-        console.log("Signup Submit")
 
-        fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${FIREBASE_WEB_KEY}`,{
-            method: "POST",
-            body: JSON.stringify({
-                "email": signupFormConfig.email.value,
-                "password": signupFormConfig.password.value,
-                "returnSecureToken": true
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-            history.push("/tasks");
-            // Come back to this
-            if(data.error) alert(data.error.message);
-        })
-        .catch(error => {
-            console.log(`Error:`, error);
+        signUp({
+            email: signupFormConfig.email.value,
+            password: signupFormConfig.password.value,
+            onSuccess: data => {
+                console.log(data);
+            },
+            onFail: error => {
+                console.log(error)
+            }
         })
 
     }

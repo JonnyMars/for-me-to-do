@@ -26,7 +26,7 @@ export default function AuthForm(props) {
                         shouldValidate={formElement.config.validation}
                         valid={formElement.config.valid}
                         touched={formElement.config.touched}
-                        blur={(e) => props.blur(e, formElement.id)}
+                        blur={(e) => props.blur(e, formElement.id, props.type)}
                     />
                 ))}
                 <Button btnType="Success" type="submit" disabled={!allValid}>{props.buttonText}</Button>
