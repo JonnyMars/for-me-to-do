@@ -4,13 +4,17 @@ import { checkValidity, authFormInitialState } from '../../common/utility';
 import useAuth from '../../hooks/useAuth';
 import AuthForm from '../../_components/AuthForm/AuthForm';
 import styles from "./Auth.module.scss";
+import ErrorModal from "../../_components/UI/ErrorModal/ErrorModal";
 
 
 export default function Login() {
 
 
-    const [loginFormConfig, setLoginFormConfig] = useState(JSON.parse(JSON.stringify(authFormInitialState)))
-    const [signupFormConfig, setSignupFormConfig] = useState(JSON.parse(JSON.stringify(authFormInitialState)))
+    const [loginFormConfig, setLoginFormConfig] = useState(JSON.parse(JSON.stringify(authFormInitialState)));
+    const [signupFormConfig, setSignupFormConfig] = useState(JSON.parse(JSON.stringify(authFormInitialState)));
+    const [formError, setFormError] = useState(null);
+
+
     // const history = useHistory();
     const {signUp, logIn} = useAuth();
 
@@ -54,9 +58,11 @@ export default function Login() {
             password: loginFormConfig.password.value,
             onSuccess: data => {
                 console.log(data);
+
+                if(data.error) setFormError(data.error.message)
             },
             onFail: error => {
-                console.log(error);
+                setFormError(error.toString())
             }
         })
 
@@ -69,9 +75,11 @@ export default function Login() {
             password: signupFormConfig.password.value,
             onSuccess: data => {
                 console.log(data);
+
+                if(data.error) setFormError(data.error.message)
             },
             onFail: error => {
-                console.log(error)
+                setFormError(error.toString())
             }
         })
 
@@ -94,11 +102,22 @@ export default function Login() {
             config: signupFormConfig[key]
         })
     }
+    
+    
+    let error = null;
+    if(formError) {
 
+        error = (
+            <ErrorModal clicked={() => setFormError(null)}>
+                {formError}
+            </ErrorModal>
+        )
+    }
 
 
     return (
         <div className={`${styles.Auth} container flex flex-center`}>
+            {error}
             <AuthForm
                 type="login"
                 formTitle="Log In"

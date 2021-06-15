@@ -1,0 +1,27 @@
+.ErrorModal {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+    max-width: 90%;
+    max-height: 90%;
+    background-color: var(--white);
+    padding: 30px 15px;
+    z-index: 100;
+    border-radius: var(--border-radius);
+
+    h2 {
+        margin: 0;
+    }
+
+    p {
+        margin: 15px 0 30px;
+        font-weight: 700;
+        font-size: 1.25em;
+        width: 100%;
+        background-color: var(--error-red-light);
+        padding: 15px 10px;
+        border-radius: var(--border-radius);
+    }
+}
