@@ -4,72 +4,43 @@ import TaskList from '../../_components/TaskList/TaskList';
 import styles from "./Tasks.module.scss";
 import useAuth from "../../hooks/useAuth";
 import { Redirect } from 'react-router-dom';
+import useTasks from '../../hooks/useTasks';
 
 export default function Tasks() {
 
     const {isAuthenticated} = useAuth();
     const [tasks, setTasks] = useState([]);
+    const {addTask, updateTaskStatus, deleteTask} = useTasks(setTasks, () => {console.log(123)});
 
-    function addTaskHandler(task) {
-        let taskObj = {
-            title: task,
+    function taskAddHandler(taskTitle) {
+        addTask({
+            title: taskTitle,
             status: "active"
-        }
-
-        fetch(`https://react-to-do-ff092-default-rtdb.europe-west1.firebasedatabase.app/tasks.json`, {
-            method: "POST",
-            body: JSON.stringify(taskObj)
-        })
-        .then(response => response.json())
-        .then(data => {
-            setTasks((prevState) => (
-                [...prevState, {
-                    ...taskObj,
-                    id: data.name
-                }]
-            ))
-        })
+        });
     }
 
-    function onComplete(id) {
-        fetch(`https://react-to-do-ff092-default-rtdb.europe-west1.firebasedatabase.app/tasks/${id}/.json`, {
-            method: "PATCH",
-            body: JSON.stringify({status: "completed"})
-        })
-        .then(response => response.json())
-        .then(data => {
-            const tasksCopy = [...tasks];
-            const active_task_index = tasksCopy.findIndex(task => task.id === id);
-            tasksCopy[active_task_index].status = "completed";
-            setTasks(tasksCopy);
-        })
+    function taskCompleteHandler(id) {
+        updateTaskStatus(
+            tasks, 
+            id,
+            "completed"
+        )
     }
 
-    function onDelete(id) {
-        fetch(`https://react-to-do-ff092-default-rtdb.europe-west1.firebasedatabase.app/tasks/${id}.json`, {
-            method: "DELETE"
-        })
-        .then(response => response.json())
-        .then(data => {
-            const tasksCopy = [...tasks];
-            const new_tasks = tasksCopy.filter(task => task.id !== id);
-            setTasks(new_tasks);
-        })
+    function taskDeleteHandler(id) {
+        deleteTask(
+            tasks, 
+            id
+        )
     }
 
-    function onUncomplete(id) {
-        fetch(`https://react-to-do-ff092-default-rtdb.europe-west1.firebasedatabase.app/tasks/${id}/.json`, {
-            method: "PATCH",
-            body: JSON.stringify({status: "active"})
-        })
-        .then(response => response.json())
-        .then(data => {
-            const tasksCopy = [...tasks];
-            const active_task_index = tasksCopy.findIndex(task => task.id === id);
-            tasksCopy[active_task_index].status = "active";
-            setTasks(tasksCopy);
-        })
-    }
+    function taskUncompleteHandler(id) {
+        updateTaskStatus(
+            tasks, 
+            id,
+            "active"
+        )
+    } 
 
 
     if(!isAuthenticated()) {
@@ -79,8 +50,8 @@ export default function Tasks() {
 
     return (
         <div className={styles.Tasks}>
-            <TaskCreator addTask={addTaskHandler}  />
-            <TaskList tasks={tasks} delete={onDelete} complete={onComplete} uncomplete={onUncomplete}  />
+            <TaskCreator addTask={taskAddHandler}  />
+            <TaskList tasks={tasks} delete={taskDeleteHandler} complete={taskCompleteHandler} uncomplete={taskUncompleteHandler}  />
         </div>
     )
 }
