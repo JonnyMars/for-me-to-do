@@ -29,27 +29,46 @@ export default function Tasks() {
                 }]
             ))
         })
-        // .catch(error => onFail(error))
     }
 
     function onComplete(id) {
-        const tasksCopy = [...tasks];
-        const active_task_index = tasksCopy.findIndex(task => task.id === id);
-        tasksCopy[active_task_index].status = "completed";
-        setTasks(tasksCopy);
+        fetch(`https://react-to-do-ff092-default-rtdb.europe-west1.firebasedatabase.app/tasks/${id}/.json`, {
+            method: "PATCH",
+            body: JSON.stringify({status: "completed"})
+        })
+        .then(response => response.json())
+        .then(data => {
+            const tasksCopy = [...tasks];
+            const active_task_index = tasksCopy.findIndex(task => task.id === id);
+            tasksCopy[active_task_index].status = "completed";
+            setTasks(tasksCopy);
+        })
     }
 
     function onDelete(id) {
-        const tasksCopy = [...tasks];
-        const new_tasks = tasksCopy.filter(task => task.id !== id);
-        setTasks(new_tasks);
+        fetch(`https://react-to-do-ff092-default-rtdb.europe-west1.firebasedatabase.app/tasks/${id}.json`, {
+            method: "DELETE"
+        })
+        .then(response => response.json())
+        .then(data => {
+            const tasksCopy = [...tasks];
+            const new_tasks = tasksCopy.filter(task => task.id !== id);
+            setTasks(new_tasks);
+        })
     }
 
     function onUncomplete(id) {
-        const tasksCopy = [...tasks];
-        const active_task_index = tasksCopy.findIndex(task => task.id === id);
-        tasksCopy[active_task_index].status = "active";
-        setTasks(tasksCopy);
+        fetch(`https://react-to-do-ff092-default-rtdb.europe-west1.firebasedatabase.app/tasks/${id}/.json`, {
+            method: "PATCH",
+            body: JSON.stringify({status: "active"})
+        })
+        .then(response => response.json())
+        .then(data => {
+            const tasksCopy = [...tasks];
+            const active_task_index = tasksCopy.findIndex(task => task.id === id);
+            tasksCopy[active_task_index].status = "active";
+            setTasks(tasksCopy);
+        })
     }
 
 
