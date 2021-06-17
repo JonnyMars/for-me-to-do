@@ -72,11 +72,13 @@ function logIn({email, password, onSuccess, onFail}) {
 
 }
 
-function logOut() {
+function logOut(cb) {
 
     window.localStorage.removeItem(FIREBASE_ID_TOKEN);
     window.localStorage.removeItem(FIREBASE_UID_TOKEN);
 
+    if(cb) cb();
+    
 }
 
 function authCheckState() {

@@ -1,14 +1,27 @@
 import React from 'react'
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
 import styles from "./Navigation.module.scss";
+import Button from "../UI/Button/Button";
 
 
 export default function Navigation(props) {
-    
-    let loginBtn = <Link to="login" className={styles.Button}>Login / Sign Up</Link>
 
+    const {isAuthenticated, logOut} = useAuth();
+    const history = useHistory();
     const location = useLocation();
-    if(location.pathname === ("/login" || "/signup")) loginBtn = null;
+    
+    let authBtn = <Link to="login" className={styles.Button}>Login / Sign Up</Link>
+
+    if(isAuthenticated()) {
+        authBtn = <Button
+                    clicked={() => {logOut(() => history.push("/"))}} 
+                    >
+                        Logout
+                </Button>;
+    }
+
+    if(location.pathname === ("/login" || "/signup")) authBtn = null;
 
 
     return (
@@ -21,7 +34,7 @@ export default function Navigation(props) {
                     <span>Do</span>
                 </Link>
                 <div>
-                    {loginBtn}
+                    {authBtn}
                 </div>
             </div>
         </nav>
