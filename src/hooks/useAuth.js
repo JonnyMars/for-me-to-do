@@ -4,6 +4,8 @@ const FIREBASE_ID_TOKEN = "firebaseUserIdToken";
 const FIREBASE_UID_TOKEN = "firebaseUserUidToken";
 const FIREBASE_EXPIRY_TIME = "firebaseUserExpiryTime";
 
+let IS_LOGGED_IN;
+
 export default function useAuth() {
 
     return {
@@ -102,11 +104,15 @@ function authCheckState() {
 
 function isAuthenticated() {
 
+    if(IS_LOGGED_IN) return true
+
     const token = window.localStorage.getItem(FIREBASE_ID_TOKEN);
     const userId = window.localStorage.getItem(FIREBASE_UID_TOKEN);
     let expirationDate = window.localStorage.getItem(FIREBASE_EXPIRY_TIME);
 
-    if(!token || !userId || !expirationDate) return false
+    if(!token || !userId || !expirationDate) return false;
+
+    IS_LOGGED_IN = true;
     
     return true;
     

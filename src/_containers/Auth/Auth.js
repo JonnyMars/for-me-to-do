@@ -5,6 +5,7 @@ import useAuth from '../../hooks/useAuth';
 import AuthForm from '../../_components/AuthForm/AuthForm';
 import styles from "./Auth.module.scss";
 import ErrorModal from "../../_components/UI/ErrorModal/ErrorModal";
+import { Redirect } from 'react-router-dom';
 
 
 export default function Login() {
@@ -16,7 +17,8 @@ export default function Login() {
 
 
     const history = useHistory();
-    const {signUp, logIn} = useAuth();
+    const {signUp, logIn, isAuthenticated} = useAuth();
+    
 
     function inputChangedHandler(e, controlName, type) {
 
@@ -116,6 +118,7 @@ export default function Login() {
         )
     }
 
+    if(isAuthenticated()) return <Redirect to="/tasks" />;
 
     return (
         <div className={`${styles.Auth} container flex flex-center`}>
