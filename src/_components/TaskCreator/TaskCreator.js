@@ -14,8 +14,11 @@ export default function TaskCreator(props) {
 
     function newTaskHandler(e) {
         e.preventDefault();
-        props.addTask(taskValue);
-        setTaskValue("");
+
+        if(taskValue !== "") {
+            props.addTask(taskValue);
+            setTaskValue("");
+        }
     }
 
     let charCounter = null;
