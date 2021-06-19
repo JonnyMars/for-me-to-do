@@ -1,11 +1,13 @@
 const FIREBASE_URL = `https://react-to-do-ff092-default-rtdb.europe-west1.firebasedatabase.app`;
 let SET_TASKS;
 let SET_ERROR;
+let AUTH_DETAILS;
 
-export default (setTasks, setError) => {
+export default (setTasks, setError, authDetails) => {
     
     SET_TASKS = setTasks;
     SET_ERROR = setError;
+    AUTH_DETAILS = authDetails;
 
     return {
         getTasks,
@@ -38,6 +40,7 @@ function getTasks() {
 
     tasksHttp({
         path: `/tasks.json`,
+        params: [`orderBy="userId"`, `equalTo="${AUTH_DETAILS.userId}"`],
         method: "GET",
         successCallback: onSuccess,
         errorCallback: onError
@@ -116,13 +119,16 @@ function deleteTask(tasks, taskId) {
 
 function tasksHttp({
     path,
+    params,
     method: taskMethod,
     body: taskBody,
     successCallback,
     errorCallback
 }) {
 
-    fetch(`${FIREBASE_URL}${path}`,
+    const queryParams = `?auth=${AUTH_DETAILS.token}${params ? ("&" + params.join("&")) : ""}`
+
+    fetch(`${FIREBASE_URL}${path}${queryParams}`,
         {
             method: taskMethod,
             body: (taskBody ? JSON.stringify(taskBody) : null),

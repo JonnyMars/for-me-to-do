@@ -8,9 +8,11 @@ import useTasks from '../../hooks/useTasks';
 
 export default function Tasks() {
 
-    const {isAuthenticated} = useAuth();
+    const {isAuthenticated, authDetails} = useAuth();
+    const {userId, token} = authDetails();
     const [tasks, setTasks] = useState([]);
-    const {getTasks, addTask, updateTaskStatus, deleteTask} = useTasks(setTasks, () => {console.log(123)});
+    const {getTasks, addTask, updateTaskStatus, deleteTask} = useTasks(setTasks, () => {console.log(123)}, authDetails());
+
 
 
     useEffect(getTasks, [])
@@ -18,7 +20,8 @@ export default function Tasks() {
     function taskAddHandler(taskTitle) {
         addTask({
             title: taskTitle,
-            status: "active"
+            status: "active",
+            userId
         });
     }
 
