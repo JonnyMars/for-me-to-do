@@ -13,7 +13,8 @@ export default function useAuth() {
         logIn: logIn,
         logOut: logOut,
         authCheckState: authCheckState,
-        isAuthenticated: isAuthenticated
+        isAuthenticated: isAuthenticated,
+        authDetails: authDetails
     }
 
 }
@@ -83,9 +84,9 @@ function logOut(cb) {
 
 function authCheckState() {
 
-    const token = window.localStorage.getItem(FIREBASE_ID_TOKEN);
-    const userId = window.localStorage.getItem(FIREBASE_UID_TOKEN);
-    let expirationDate = window.localStorage.getItem(FIREBASE_EXPIRY_TIME);
+    const {token, userId, expirationDate: _expirationDate} = authDetails();
+
+    let expirationDate = _expirationDate;
 
     if(!token || !userId || !expirationDate) {
         logOut();
@@ -108,9 +109,7 @@ function isAuthenticated() {
 
     if(IS_LOGGED_IN) return true
 
-    const token = window.localStorage.getItem(FIREBASE_ID_TOKEN);
-    const userId = window.localStorage.getItem(FIREBASE_UID_TOKEN);
-    let expirationDate = window.localStorage.getItem(FIREBASE_EXPIRY_TIME);
+    const {token, userId, expirationDate} = authDetails();
 
     if(!token || !userId || !expirationDate) return false;
 
@@ -118,6 +117,20 @@ function isAuthenticated() {
     
     return true;
     
+}
+
+function authDetails() {
+
+    const token = window.localStorage.getItem(FIREBASE_ID_TOKEN);
+    const userId = window.localStorage.getItem(FIREBASE_UID_TOKEN);
+    const expirationDate = window.localStorage.getItem(FIREBASE_EXPIRY_TIME);
+
+    return {
+        token,
+        userId,
+        expirationDate
+    }
+
 }
 
 function checkAuthTimeout(expirationTime) {

@@ -8,10 +8,40 @@ export default (setTasks, setError) => {
     SET_ERROR = setError;
 
     return {
+        getTasks,
         addTask,
         updateTaskStatus,
         deleteTask,
     }
+
+}
+
+function getTasks() {
+
+    function onSuccess(data) {
+
+        const arr = [];
+
+        for(const [id, obj] of Object.entries(data)) {
+            arr.push({
+                ...obj,
+                id: id
+            })
+        }
+
+        SET_TASKS(arr);
+    }
+
+    function onError(error) {
+        console.log("GET TASKS", error)
+    }
+
+    tasksHttp({
+        path: `/tasks.json`,
+        method: "GET",
+        successCallback: onSuccess,
+        errorCallback: onError
+    })
 
 }
 
@@ -95,7 +125,7 @@ function tasksHttp({
     fetch(`${FIREBASE_URL}${path}`,
         {
             method: taskMethod,
-            body: (taskBody ? JSON.stringify(taskBody) : JSON.stringify({})),
+            body: (taskBody ? JSON.stringify(taskBody) : null),
         }
     )
     .then(response => response.json())

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import TaskCreator from '../../_components/TaskCreator/TaskCreator';
 import TaskList from '../../_components/TaskList/TaskList';
 import styles from "./Tasks.module.scss";
@@ -10,7 +10,10 @@ export default function Tasks() {
 
     const {isAuthenticated} = useAuth();
     const [tasks, setTasks] = useState([]);
-    const {addTask, updateTaskStatus, deleteTask} = useTasks(setTasks, () => {console.log(123)});
+    const {getTasks, addTask, updateTaskStatus, deleteTask} = useTasks(setTasks, () => {console.log(123)});
+
+
+    useEffect(getTasks, [])
 
     function taskAddHandler(taskTitle) {
         addTask({
