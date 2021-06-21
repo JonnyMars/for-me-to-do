@@ -23,6 +23,7 @@ export default function Navigation(props) {
 
     if(location.pathname === ("/login" || "/signup")) authBtn = null;
 
+    console.log("NAV RERENDER", isAuthenticated());
 
     return (
         <nav className={`${styles.Navigation} full-width`}>

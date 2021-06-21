@@ -78,6 +78,7 @@ function logOut(cb) {
     window.localStorage.removeItem(FIREBASE_ID_TOKEN);
     window.localStorage.removeItem(FIREBASE_UID_TOKEN);
     window.localStorage.removeItem(FIREBASE_EXPIRY_TIME);
+    IS_LOGGED_IN = false;
 
     if(cb) cb();
     
