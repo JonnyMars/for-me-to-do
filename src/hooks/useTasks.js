@@ -39,8 +39,7 @@ function getTasks() {
     }
 
     tasksHttp({
-        path: `/tasks.json`,
-        params: [`orderBy="userId"`, `equalTo="${AUTH_DETAILS.userId}"`],
+        path: `/tasks/${AUTH_DETAILS.userId}.json`,
         method: "GET",
         successCallback: onSuccess,
         errorCallback: onError
@@ -64,7 +63,7 @@ function addTask(taskObj) {
     }
 
     tasksHttp({
-        path: `/tasks.json`,
+        path: `/tasks/${AUTH_DETAILS.userId}.json`,
         method: "POST",
         body: taskObj,
         successCallback: onSuccess,
@@ -87,7 +86,7 @@ function updateTaskStatus(tasks, taskId, taskStatus) {
     }
 
     tasksHttp({
-        path: `/tasks/${taskId}/.json`,
+        path: `/tasks/${AUTH_DETAILS.userId}/${taskId}/.json`,
         method: "PATCH",
         body: {status: taskStatus},
         successCallback: onSuccess,
@@ -109,7 +108,7 @@ function deleteTask(tasks, taskId) {
 
 
     tasksHttp({
-        path: `/tasks/${taskId}.json`,
+        path: `/tasks/${AUTH_DETAILS.userId}/${taskId}.json`,
         method: "DELETE",
         successCallback: onSuccess,
         errorCallback: onError

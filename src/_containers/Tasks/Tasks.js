@@ -20,8 +20,7 @@ export default function Tasks() {
     function taskAddHandler(taskTitle) {
         addTask({
             title: taskTitle,
-            status: "active",
-            userId
+            status: "active"
         });
     }
 

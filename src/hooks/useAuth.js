@@ -96,7 +96,7 @@ function authCheckState() {
         expirationDate = new Date(expirationDate);
 
         if(expirationDate <= new Date()) {
-
+            logOut();
         } else {
             checkAuthTimeout( (expirationDate.getTime() - new Date().getTime()) / 1000 )
             console.log("AUTH SUCCESS");
