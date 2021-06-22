@@ -5,13 +5,16 @@ import styles from "./Tasks.module.scss";
 import useAuth from "../../hooks/useAuth";
 import { Redirect } from 'react-router-dom';
 import useTasks from '../../hooks/useTasks';
+import ErrorModal from "../../_components/UI/ErrorModal/ErrorModal";
+
 
 export default function Tasks() {
 
     const {isAuthenticated, authDetails} = useAuth();
     const {userId, token} = authDetails();
     const [tasks, setTasks] = useState([]);
-    const {getTasks, addTask, updateTaskStatus, deleteTask} = useTasks(setTasks, () => {console.log(123)}, authDetails());
+    const [tasksError, setTasksError] = useState(null);
+    const {getTasks, addTask, updateTaskStatus, deleteTask} = useTasks(setTasks, setTasksError, authDetails());
 
 
 
@@ -52,9 +55,21 @@ export default function Tasks() {
         return <Redirect to="/" />
     }
 
+    
+    let error = null;
+    if(tasksError) {
+
+        error = (
+            <ErrorModal clicked={() => setTasksError(null)}>
+                {tasksError.toString()}
+            </ErrorModal>
+        )
+
+    }
 
     return (
         <div className={styles.Tasks}>
+            {error}
             <TaskCreator addTask={taskAddHandler}  />
             <TaskList tasks={tasks} delete={taskDeleteHandler} complete={taskCompleteHandler} uncomplete={taskUncompleteHandler}  />
         </div>

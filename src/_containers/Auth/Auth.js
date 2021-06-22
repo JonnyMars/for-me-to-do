@@ -65,7 +65,7 @@ export default function Login() {
                 if(!data.error) history.push("/tasks");
             },
             onFail: error => {
-                setFormError(error.toString())
+                setFormError(error)
             }
         })
 
@@ -83,7 +83,7 @@ export default function Login() {
                 if(!data.error) history.push("/tasks");
             },
             onFail: error => {
-                setFormError(error.toString())
+                setFormError(error)
             }
         })
 
@@ -113,7 +113,7 @@ export default function Login() {
 
         error = (
             <ErrorModal clicked={() => setFormError(null)}>
-                {formError}
+                {formError.toString()}
             </ErrorModal>
         )
     }

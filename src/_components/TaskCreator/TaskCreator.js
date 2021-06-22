@@ -4,7 +4,7 @@ import styles from "./TaskCreator.module.scss";
 
 export default function TaskCreator(props) {
 
-    const charLimit = 60
+    const charLimit = 60;
     const [taskValue, setTaskValue] = useState("");
 
     function onTaskValueChange(e) {

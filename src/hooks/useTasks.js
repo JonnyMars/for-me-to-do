@@ -134,7 +134,21 @@ function tasksHttp({
         }
     )
     .then(response => response.json())
-    .then(data => successCallback(data))
-    .catch(error => errorCallback(error))
+    .then(data => {
+        console.log("DATA", data);
+        if(data.error) {
+            SET_ERROR(data.error);
+            return;
+        } else {
+            SET_ERROR(null);
+            successCallback(data)
+        }
+
+    })
+    .catch(error => {
+        console.log("ERROR", error);
+        SET_ERROR(error)
+        errorCallback(error)
+    })
 
 }
