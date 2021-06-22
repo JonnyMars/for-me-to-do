@@ -42,8 +42,14 @@ export default function TaskItem(props) {
 
     }
 
+    let taskClasses = [styles.TaskItem]
+
+    if(props.task.thinking) {
+        taskClasses.push(styles.TaskThinking);
+    }
+
     return (
-        <div className={`${styles.TaskItem} flex`}>
+        <div className={`${taskClasses.join(" ")} flex`}>
             <p className={styles.Title}>{props.task.title}</p>
             <div className={`${styles.Actions} flex`}>
                 {buttons}

@@ -74,11 +74,13 @@ function addTask(taskObj) {
 }
 
 function updateTaskStatus(tasks, taskId, taskStatus) {
+    taskThinking(tasks, taskId)
 
     function onSuccess(data) {
         const tasksCopy = [...tasks];
         const active_task_index = tasksCopy.findIndex(task => task.id === taskId);
         tasksCopy[active_task_index].status = taskStatus;
+        tasksCopy[active_task_index].thinking = false;
         SET_TASKS(tasksCopy);
     }
 
@@ -96,6 +98,7 @@ function updateTaskStatus(tasks, taskId, taskStatus) {
 }
 
 function deleteTask(tasks, taskId) {
+    taskThinking(tasks, taskId)
 
     function onSuccess(data) {
         const tasksCopy = [...tasks];
@@ -152,4 +155,11 @@ function tasksHttp({
         errorCallback(error)
     })
 
+}
+
+function taskThinking(tasks, taskId) {
+    const tasksCopy = [...tasks];
+    const active_task_index = tasksCopy.findIndex(task => task.id === taskId);
+    tasksCopy[active_task_index].thinking = true;
+    SET_TASKS(tasksCopy);
 }

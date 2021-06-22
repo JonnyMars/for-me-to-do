@@ -79,6 +79,8 @@ export default function Tasks() {
 
     }
     
+    console.log("TASKS", tasks);
+
     return (
         <div className={styles.Tasks}>
             <TaskCreator addTask={taskAddHandler}  />

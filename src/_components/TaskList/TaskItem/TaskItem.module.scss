@@ -7,6 +7,32 @@
     border-radius: var(--border-radius);
     align-items: center;
     justify-content: space-between;
+    overflow: hidden;
+}
+
+.TaskThinking {
+    position: relative;
+    outline: medium solid var(--green);
+
+    &::before {
+        display: block;
+        content: "Updating...";
+        color: var(--black);
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .Actions, .Title {
+        opacity: 0;
+        visibility: hidden;
+    }
 }
 
 .Title {
