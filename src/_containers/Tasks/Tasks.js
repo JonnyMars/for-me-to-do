@@ -6,19 +6,24 @@ import useAuth from "../../hooks/useAuth";
 import { Redirect } from 'react-router-dom';
 import useTasks from '../../hooks/useTasks';
 import ErrorModal from "../../_components/UI/ErrorModal/ErrorModal";
+import Spinner from "../../_components/UI/Spinner/Spinner";
 
 
 export default function Tasks() {
 
     const {isAuthenticated, authDetails} = useAuth();
     const {userId, token} = authDetails();
+
     const [tasks, setTasks] = useState([]);
     const [tasksError, setTasksError] = useState(null);
+    const [tasksLoading, setTasksLoading] = useState(true);
+    
     const {getTasks, addTask, updateTaskStatus, deleteTask} = useTasks(setTasks, setTasksError, authDetails());
+    
 
-
-
-    useEffect(getTasks, [])
+    useEffect(() => {
+        getTasks(() => setTasksLoading(false));
+    }, [])
 
     function taskAddHandler(taskTitle) {
         addTask({
@@ -67,11 +72,19 @@ export default function Tasks() {
 
     }
 
+    let loading = null;
+    if(tasksLoading) {
+
+        loading = <Spinner />;
+
+    }
+    
     return (
         <div className={styles.Tasks}>
-            {error}
             <TaskCreator addTask={taskAddHandler}  />
-            <TaskList tasks={tasks} delete={taskDeleteHandler} complete={taskCompleteHandler} uncomplete={taskUncompleteHandler}  />
+            {loading}
+            <TaskList tasks={tasks} delete={taskDeleteHandler} complete={taskCompleteHandler} uncomplete={taskUncompleteHandler} tasksLoading={loading}  />
+            {error}
         </div>
     )
 }

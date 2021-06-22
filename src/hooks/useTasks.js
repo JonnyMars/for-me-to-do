@@ -18,7 +18,7 @@ export default (setTasks, setError, authDetails) => {
 
 }
 
-function getTasks() {
+function getTasks(onLoadCallback) {
 
     function onSuccess(data) {
 
@@ -32,6 +32,7 @@ function getTasks() {
         }
 
         SET_TASKS(arr);
+        onLoadCallback?.();
     }
 
     function onError(error) {

@@ -1,0 +1,44 @@
+.SpinnerContainer {
+    padding: 10px;
+}
+
+.Spinner {
+
+    &::after {
+        content: " ";
+        display: block;
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        border: 6px solid var(--white);
+        border-color: var(--white) transparent var(--white) transparent;
+        animation: lds-dual-ring 1.2s linear infinite;
+    }
+}
+
+@keyframes lds-dual-ring {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+}
+
+.Blue {
+    &::after{
+        border-color: var(--blue) transparent var(--blue) transparent;;
+    }
+}
+
+.Green {
+    &::after{
+        border-color: var(--green) transparent var(--green) transparent;;
+    }
+}
+
+.Orange {
+    &::after{
+        border-color: var(--orange) transparent var(--orange) transparent;;
+    }
+}
