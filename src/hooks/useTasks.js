@@ -140,7 +140,7 @@ function tasksHttp({
     .then(response => response.json())
     .then(data => {
         console.log("DATA", data);
-        if(data.error) {
+        if(data && data.error) {
             SET_ERROR(data.error);
             return;
         } else {

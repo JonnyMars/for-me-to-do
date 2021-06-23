@@ -1,3 +1,5 @@
+@import "../../../common/sass/mixins";
+
 .TaskItem {
     width: 100%;
     background-color: rgba($color: #FFF, $alpha: .6);
@@ -7,12 +9,29 @@
     border-radius: var(--border-radius);
     align-items: center;
     justify-content: space-between;
-    overflow: hidden;
+    position: relative;
+
+    @include up-to-tablet {
+
+        margin-bottom: 60px;
+        border-bottom-right-radius: 0;
+
+        .Actions {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            transform: translateY(100%);
+            margin: 0;
+            background-color: inherit;
+            padding: 5px 6px 5px 10px;
+            border-bottom-right-radius: var(--border-radius);
+            border-bottom-left-radius: var(--border-radius);
+        }
+    }
+    
 }
 
 .TaskThinking {
-    position: relative;
-    outline: medium solid var(--green);
 
     &::before {
         display: block;

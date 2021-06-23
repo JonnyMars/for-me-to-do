@@ -21,13 +21,11 @@ export default function TaskCreator(props) {
         }
     }
 
+    
     let charCounter = null;
-
     if(taskValue.length > 0) {
         charCounter = <div className={styles.CharCounter}>{taskValue.length}/{charLimit}</div>
     }
-
-    
 
     return (
         <section className={`${styles.TaskCreator} flex flex-center `}>

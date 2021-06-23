@@ -12,7 +12,6 @@ import Spinner from "../../_components/UI/Spinner/Spinner";
 export default function Tasks() {
 
     const {isAuthenticated, authDetails} = useAuth();
-    const {userId, token} = authDetails();
 
     const [tasks, setTasks] = useState([]);
     const [tasksError, setTasksError] = useState(null);

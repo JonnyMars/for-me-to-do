@@ -11,14 +11,14 @@ export default function TaskItem(props) {
         buttons = (
             <>
                 <ListActionButton 
-                        type="CROSS" 
-                        clicked={() => props.delete(props.task.id)} 
-                        title="Delete this Task"
-                />
-                 <ListActionButton 
                         type="UP" 
                         clicked={() => props.uncomplete(props.task.id)}
                         title="Move completed task into active tasks"
+                />
+                <ListActionButton 
+                        type="CROSS" 
+                        clicked={() => props.delete(props.task.id)} 
+                        title="Delete this Task"
                 />
             </>
         )
