@@ -21,7 +21,7 @@ export default function TaskList(props) {
 
     return (
         <section className={`${styles.TaskList} flex`}>
-            {lists};
+            {lists}
         </section>
     )
 }

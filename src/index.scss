@@ -1,3 +1,5 @@
+@import "./common/sass/mixins";
+
 :root {
   /* Base Colours */
   --black: #000;
@@ -19,7 +21,13 @@
   /* Fonts */
   --header: 1.5em;
   
+  @include up-to-mobile {
+    --header: 1.25em;
+  }
+
 }
+
+
 
 
 * {
