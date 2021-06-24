@@ -45,3 +45,23 @@
     transition: background-color .25s ease-out;
 
 }
+
+.NavActionContainer {
+
+    .NavLink {
+
+        text-decoration: underline;
+        font-size: 1.25em;
+        font-weight: bold;
+        color: var(--orange);
+
+        &:hover {
+            text-decoration: none;
+        }
+
+    }
+
+    & > *:not(:last-child) {
+        margin-right: 35px;
+    }
+}

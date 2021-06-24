@@ -11,17 +11,22 @@ export default function Navigation(props) {
     const history = useHistory();
     const location = useLocation();
     
-    let authBtn = <Link to="login" className={styles.Button}>Login / Sign Up</Link>
+    let navLinks = <Link to="login" className={styles.Button}>Login / Sign Up</Link>
 
     if(isAuthenticated()) {
-        authBtn = <Button
-                    clicked={() => {logOut(() => history.push("/"))}} 
-                    >
-                        Logout
-                </Button>;
+        navLinks = (
+                <>
+                    <Link className={styles.NavLink} to="/tasks">Tasks</Link>
+                    <Button
+                        clicked={() => {logOut(() => history.push("/"))}} 
+                        >
+                            Logout
+                    </Button>
+                </>
+        );
     }
 
-    if(location.pathname === ("/login" || "/signup")) authBtn = null;
+    if(location.pathname === ("/login" || "/signup")) navLinks = null;
 
     return (
         <nav className={`${styles.Navigation} full-width`}>
@@ -32,8 +37,8 @@ export default function Navigation(props) {
                     <span>To</span>
                     <span>Do</span>
                 </Link>
-                <div>
-                    {authBtn}
+                <div className={styles.NavActionContainer}>
+                    {navLinks}
                 </div>
             </div>
         </nav>
