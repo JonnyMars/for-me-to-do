@@ -24,11 +24,13 @@ function getTasks(onLoadCallback) {
 
         const arr = [];
 
-        for(const [id, obj] of Object.entries(data)) {
-            arr.push({
-                ...obj,
-                id: id
-            })
+        if(data) {
+            for(const [id, obj] of Object.entries(data)) {
+                arr.push({
+                    ...obj,
+                    id: id
+                })
+            }
         }
 
         SET_TASKS(arr);
