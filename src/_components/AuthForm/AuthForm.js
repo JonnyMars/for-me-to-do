@@ -2,6 +2,7 @@ import React from 'react'
 import Button from '../UI/Button/Button';
 import Input from '../UI/Input/Input';
 import styles from "./AuthForm.module.scss";
+import Spinner from "../UI/Spinner/Spinner";
 
 export default function AuthForm(props) {
 
@@ -10,6 +11,15 @@ export default function AuthForm(props) {
     const validFormElements = props.formElements.filter(formElement => formElement.config.valid === true);
 
     if(validFormElements.length === props.formElements.length) allValid = true;
+
+    let loading = null;
+    if(props.loading) {
+        loading = (
+            <div className={styles.AuthSpinner}>
+                <Spinner color="Orange" />
+            </div>
+        )
+    }
     
     return (
         <div className={`${styles.AuthForm} container`}>
@@ -29,7 +39,10 @@ export default function AuthForm(props) {
                         blur={(e) => props.blur(e, formElement.id, props.type)}
                     />
                 ))}
-                <Button btnType="Success" type="submit" disabled={!allValid}>{props.buttonText}</Button>
+                <div className={styles.SubmitButtonContainer} >
+                    {loading}
+                    <Button btnType="Success" type="submit" disabled={!allValid}>{props.buttonText}</Button>
+                </div>
             </form>
         </div>
     )

@@ -12,7 +12,11 @@ export default function Login() {
 
 
     const [loginFormConfig, setLoginFormConfig] = useState(JSON.parse(JSON.stringify(authFormInitialState)));
+    const [loginFormLoading, setLoginFormLoading] = useState(false);
+
     const [signupFormConfig, setSignupFormConfig] = useState(JSON.parse(JSON.stringify(authFormInitialState)));
+    const [signupFormLoading, setSignupFormLoading] = useState(false);
+
     const [formError, setFormError] = useState(null);
 
 
@@ -54,17 +58,21 @@ export default function Login() {
 
     function loginSubmitHandler(e) {
         e.preventDefault();
-
+        setLoginFormLoading(true);
         logIn({
             email: loginFormConfig.email.value,
             password: loginFormConfig.password.value,
             onSuccess: data => {
                 console.log(data);
 
+                setLoginFormLoading(false);
+
                 if(data.error) setFormError(data.error.message)
                 if(!data.error) history.push("/tasks");
             },
             onFail: error => {
+                setLoginFormLoading(false);
+
                 setFormError(error)
             }
         })
@@ -72,17 +80,21 @@ export default function Login() {
     }
     function signupSubmitHandler(e) {
         e.preventDefault();
-
+        setSignupFormLoading(true)
         signUp({
             email: signupFormConfig.email.value,
             password: signupFormConfig.password.value,
             onSuccess: data => {
                 console.log(data);
 
+                setSignupFormLoading(false);
+
                 if(data.error) setFormError(data.error.message);
                 if(!data.error) history.push("/tasks");
             },
             onFail: error => {
+                setSignupFormLoading(false);
+
                 setFormError(error)
             }
         })
@@ -131,6 +143,7 @@ export default function Login() {
                 formElements={loginFormElementsArray}
                 change={inputChangedHandler}
                 blur={inputBlurHandler}
+                loading={loginFormLoading}
             />
             <span className={styles.Divider}>or</span> 
             <AuthForm
@@ -141,6 +154,7 @@ export default function Login() {
                 formElements={signupFormElementsArray }
                 change={inputChangedHandler}
                 blur={inputBlurHandler}
+                loading={signupFormLoading}
             />
         </div>
     )

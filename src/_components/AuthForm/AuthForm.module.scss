@@ -19,3 +19,14 @@
 
 
 }
+
+.SubmitButtonContainer {
+    position: relative;
+}
+
+.AuthSpinner {
+    position: absolute;
+    top: -25px;
+    transform: scale(.6) translate(-150%);
+    left: 0;
+}
