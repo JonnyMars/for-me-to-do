@@ -40,6 +40,9 @@ export default function Navigation(props) {
                 <div className={styles.NavActionContainer}>
                     {navLinks}
                 </div>
+                <button className={styles.MobileNavActionContainer}>
+                    <span className={styles.BurgerMenu}></span>
+                </button>
             </div>
         </nav>
     )

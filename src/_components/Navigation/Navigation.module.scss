@@ -1,3 +1,5 @@
+@import "../../common/sass/mixins";
+
 .Navigation {
     padding: 15px 0;
     background-color: var(--white);
@@ -6,6 +8,11 @@
 .Container {
     justify-content: space-between;
     align-items: center;
+    position: relative;
+
+    @include up-to-tablet {
+        justify-content: center;
+    }
 }
 
 .Logo {
@@ -48,6 +55,10 @@
 
 .NavActionContainer {
 
+    @include up-to-tablet {
+        display: none;
+    }
+
     .NavLink {
 
         text-decoration: underline;
@@ -64,4 +75,53 @@
     & > *:not(:last-child) {
         margin-right: 35px;
     }
+}
+
+$burger-menu-height: 45px;
+
+.MobileNavActionContainer {
+
+    @include from-tablet-up {
+        display: none;
+    }
+    height: $burger-menu-height;
+    width: 38px;
+    position: absolute;
+    right: 15px;
+    cursor: pointer;
+    padding: 0;
+    border: none;
+    outline: none;
+    background-color: transparent;
+
+}
+
+.BurgerMenu {
+    display: block;
+    width: 100%;
+    background: var(--green);
+    width: 100%;
+    height: $burger-menu-height / 8;
+    padding: 0;
+    position: relative;
+    cursor: pointer;
+    
+
+    &::before, &::after {
+        content: "";
+        height: $burger-menu-height / 8;
+        width: 100%;
+        display: block;
+        position: absolute;
+    }
+
+    &::before {
+        top: -250%;
+        background-color: var(--orange);
+    }
+    &::after {
+        bottom: -250%;
+        background-color: var(--blue);
+    }
+
 }
