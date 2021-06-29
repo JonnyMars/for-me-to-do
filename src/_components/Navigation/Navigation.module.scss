@@ -79,11 +79,12 @@
 
 $burger-menu-height: 45px;
 
-.MobileNavActionContainer {
+.MobileNavAction{
 
     @include from-tablet-up {
         display: none;
     }
+    
     height: $burger-menu-height;
     width: 38px;
     position: absolute;
