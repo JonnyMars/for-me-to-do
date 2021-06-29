@@ -83,8 +83,10 @@ export default function Tasks() {
     return (
         <div className={styles.Tasks}>
             <TaskCreator addTask={taskAddHandler}  />
-            {loading}
-            <TaskList tasks={tasks} delete={taskDeleteHandler} complete={taskCompleteHandler} uncomplete={taskUncompleteHandler} tasksLoading={loading}  />
+            <div className={styles.TaskContentContainer}>
+                {loading}
+                <TaskList tasks={tasks} delete={taskDeleteHandler} complete={taskCompleteHandler} uncomplete={taskUncompleteHandler} tasksLoading={loading}  />
+            </div>
             {error}
         </div>
     )
