@@ -2,16 +2,20 @@ import { Redirect, Route, Switch } from "react-router-dom";
 import Tasks from "./_containers/Tasks/Tasks";
 import Layout from "./_hoc/Layout/Layout";
 import Auth from "./_containers/Auth/Auth";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import useAuth from "./hooks/useAuth";
 
 function App() {
 
   const {authCheckState} = useAuth();
 
+  const [userAuthenticated, setUserAuthenticated] = useState(false);
+
   useEffect(() => {
-    authCheckState();
+    authCheckState(setUserAuthenticated);
   }, [authCheckState])
+
+  console.log("AUTH STATE", userAuthenticated);
   
   return (
     <div className="App">

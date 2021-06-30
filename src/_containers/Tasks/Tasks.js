@@ -21,6 +21,7 @@ export default function Tasks() {
     
 
     useEffect(() => {
+        console.log("TASKS");
         getTasks(() => setTasksLoading(false));
     }, [])
 
