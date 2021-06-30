@@ -8,10 +8,6 @@ $svg-blue: "%23389FAE"; //%23 === #
     width: $button-width-height;
     height: $button-width-height;
     position: relative;
-    background-color: transparent;
-    border: none;
-    outline: none;
-    cursor: pointer;
     -webkit-appearance: none;
 
     & + .ListActionButton {

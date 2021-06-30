@@ -18,9 +18,11 @@ export default function NavigationSidebar(props) {
         <>
             <div className={`${sidebarClasses.join(" ")} flex flex-wrap`}>
                 {props.logoLink}
+                <button className={styles.LilNavX} onClick={props.close}>&times;</button>
                 <div className={styles.NavSidebarActions}>
                     {props.children}
                 </div>
+
             </div>
             <Backdrop show={props.show} clicked={props.close} />
         </>

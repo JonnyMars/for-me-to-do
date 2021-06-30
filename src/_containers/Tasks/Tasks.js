@@ -21,9 +21,8 @@ export default function Tasks() {
     
 
     useEffect(() => {
-        console.log("TASKS");
         getTasks(() => setTasksLoading(false));
-    }, [])
+    }, [getTasks])
 
     function taskAddHandler(taskTitle) {
         addTask({
@@ -78,8 +77,6 @@ export default function Tasks() {
         loading = <Spinner />;
 
     }
-    
-    console.log("TASKS", tasks);
 
     return (
         <div className={styles.Tasks}>

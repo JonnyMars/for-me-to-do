@@ -18,6 +18,8 @@
   --error-red-light:#f78686; 
   --border-radius: 10px;
 
+  --doc-min-width: 320px;
+
   /* Fonts */
   --header: 1.5em;
   
@@ -40,7 +42,14 @@
 
 body {
   margin: 0;
-  min-width: 320px;
+  min-width: var(--doc-min-width);
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
 }
 
 code {
