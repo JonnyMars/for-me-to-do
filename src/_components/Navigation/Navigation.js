@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { Link, useHistory, useLocation } from 'react-router-dom';
-import useAuth from '../../hooks/useAuth';
 import styles from "./Navigation.module.scss";
 import Button from "../UI/Button/Button";
 import NavigationSidebar from "./NavigationSidebar/NavigationSidebar";
+import { useAuth } from '../../_contexts/AuthContext';
 
 export default function Navigation(props) {
 
-    const {isAuthenticated, logOut} = useAuth();
+    const {currentUser, logOut} = useAuth();
     const history = useHistory();
     const location = useLocation();
 
@@ -27,7 +27,7 @@ export default function Navigation(props) {
     
     let navLinks = <Link to="login" className={styles.Button} onClick={closeMobileNav}>Login / Sign Up</Link>
 
-    if(isAuthenticated()) {
+    if(currentUser) {
         navLinks = (
                 <>
                     <Link className={styles.NavLink} onClick={closeMobileNav} to="/tasks">Tasks</Link>

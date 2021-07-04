@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import TaskCreator from '../../_components/TaskCreator/TaskCreator';
 import TaskList from '../../_components/TaskList/TaskList';
 import styles from "./Tasks.module.scss";
-import useAuth from "../../hooks/useAuth";
+import {useAuth} from "../../_contexts/AuthContext";
 import { Redirect } from 'react-router-dom';
 import useTasks from '../../hooks/useTasks';
 import ErrorModal from "../../_components/UI/ErrorModal/ErrorModal";
@@ -11,13 +11,13 @@ import Spinner from "../../_components/UI/Spinner/Spinner";
 
 export default function Tasks() {
 
-    const {isAuthenticated, authDetails} = useAuth();
+    const {currentUser} = useAuth();
 
     const [tasks, setTasks] = useState([]);
     const [tasksError, setTasksError] = useState(null);
     const [tasksLoading, setTasksLoading] = useState(true);
     
-    const {getTasks, addTask, updateTaskStatus, deleteTask} = useTasks(setTasks, setTasksError, authDetails());
+    const {getTasks, addTask, updateTaskStatus, deleteTask} = useTasks(setTasks, setTasksError, currentUser);
     
 
     useEffect(() => {
@@ -55,9 +55,9 @@ export default function Tasks() {
     } 
 
 
-    if(!isAuthenticated()) {
-        return <Redirect to="/" />
-    }
+    // if(!currentUser) {
+    //     return <Redirect to="/" />
+    // }
 
     
     let error = null;
