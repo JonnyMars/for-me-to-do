@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react'
+
+import styles from "./Tasks.module.scss";
+
 import TaskCreator from '../../_components/TaskCreator/TaskCreator';
 import TaskList from '../../_components/TaskList/TaskList';
-import styles from "./Tasks.module.scss";
-import {useAuth} from "../../_contexts/AuthContext";
-import { Redirect } from 'react-router-dom';
-import useTasks from '../../hooks/useTasks';
+import TaskDeleteConfirmation from '../../_components/TaskDeleteConfirmation/TaskDeleteConfirmation';
 import ErrorModal from "../../_components/UI/ErrorModal/ErrorModal";
 import Spinner from "../../_components/UI/Spinner/Spinner";
+
+import {useAuth} from "../../_contexts/AuthContext";
+import useTasks from '../../hooks/useTasks';
 
 
 export default function Tasks() {
@@ -16,6 +19,7 @@ export default function Tasks() {
     const [tasks, setTasks] = useState([]);
     const [tasksError, setTasksError] = useState(null);
     const [tasksLoading, setTasksLoading] = useState(true);
+    const [taskToDelete, setTaskToDelete] = useState(null);
     
     const {getTasks, addTask, updateTaskStatus, deleteTask} = useTasks(setTasks, setTasksError, currentUser);
     
@@ -40,10 +44,16 @@ export default function Tasks() {
     }
 
     function taskDeleteHandler(id) {
+        const taskArr = tasks.filter(task => task.id === id);
+        if(taskArr.length > 0) setTaskToDelete(taskArr[0]);
+    }
+
+    function taskDeleteConfirmationHandler(id) {
+        setTaskToDelete(null);
         deleteTask(
             tasks, 
             id
-        )
+        );
     }
 
     function taskUncompleteHandler(id) {
@@ -53,12 +63,6 @@ export default function Tasks() {
             "active"
         )
     } 
-
-
-    // if(!currentUser) {
-    //     return <Redirect to="/" />
-    // }
-
     
     let error = null;
     if(tasksError) {
@@ -78,6 +82,19 @@ export default function Tasks() {
 
     }
 
+    let taskDeleteConfirmationPopup = null;
+    if(taskToDelete) {
+
+        taskDeleteConfirmationPopup = (
+            <TaskDeleteConfirmation
+                task_info={taskToDelete}
+                cancel={() => setTaskToDelete(null)}
+                confirm={() => taskDeleteConfirmationHandler(taskToDelete.id)}
+            />
+        )
+
+    }
+
     return (
         <div className={styles.Tasks}>
             <TaskCreator addTask={taskAddHandler}  />
@@ -85,6 +102,7 @@ export default function Tasks() {
                 {loading}
                 <TaskList tasks={tasks} delete={taskDeleteHandler} complete={taskCompleteHandler} uncomplete={taskUncompleteHandler} tasksLoading={loading}  />
             </div>
+            {taskDeleteConfirmationPopup}
             {error}
         </div>
     )

@@ -1,0 +1,43 @@
+@import "../../common/sass/mixins";
+
+.TaskDeleteConfirmation {
+
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    max-width: 90%;
+    max-height: 90%;
+    background-color: var(--white);
+    padding: 30px 15px;
+    z-index: 100;
+    border-radius: var(--border-radius);
+
+    @include small-mobile {
+        padding: 20px 8px;
+    }
+
+    h2 {
+        text-align: center;
+    }
+
+}
+
+.TaskTitle {
+    font-size: 1.25em;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+    display: block;
+    background-color:#389eae98;
+    padding: 15px;
+    border-radius: var(--border-radius);
+    margin: 25px 0;
+}
+
+.Actions {
+    justify-content: space-between;
+    max-width: 300px;
+    margin: 0 auto;
+}
