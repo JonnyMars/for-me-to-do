@@ -14,7 +14,6 @@ function App() {
           <Switch>
             <PrivateRoute exact path="/tasks" component={Tasks} />
             <Route path={["/login", "/signup"]} component={Auth} />
-            {/* <Route path="/tasks" component={Tasks} /> */}
             <Route render={() => <Redirect to="/" />} />
           </Switch>
         </Layout>

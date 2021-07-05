@@ -1,11 +1,15 @@
 import React, { useState } from 'react'
-import { useHistory } from 'react-router';
-import { checkValidity, authFormInitialState } from '../../common/utility';
-import AuthForm from '../../_components/AuthForm/AuthForm';
+
 import styles from "./Auth.module.scss";
+
+import { checkValidity, authFormInitialState, authAttemptErrorMap } from '../../common/utility';
+
+import AuthForm from '../../_components/AuthForm/AuthForm';
 import ErrorModal from "../../_components/UI/ErrorModal/ErrorModal";
+
 import { Redirect } from 'react-router-dom';
 import { useAuth } from '../../_contexts/AuthContext';
+import { useHistory } from 'react-router';
 
 
 export default function Login() {
@@ -122,10 +126,11 @@ export default function Login() {
     
     let error = null;
     if(formError) {
-
+        const errString = formError.toString();
+        const errMessage = authAttemptErrorMap[errString] ? authAttemptErrorMap[errString] : errString;
         error = (
             <ErrorModal clicked={() => setFormError(null)}>
-                {formError.toString()}
+                {errMessage}
             </ErrorModal>
         )
     }
