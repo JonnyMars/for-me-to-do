@@ -11,6 +11,7 @@ export default function Input(props) {
         inputClasses.push(styles.Invalid);
     }
 
+    console.log(props.elementType);
 
     switch(props.elementType) {
 
@@ -37,11 +38,17 @@ export default function Input(props) {
 
     }
 
+    const label = <label className={styles.Label}>{props.elementLabel}</label>;
+    
+    let content = (<>{label}{inputElement}</>)
+    if(props.labelLast) {
+        content = (<>{inputElement}{label}</>)
+    } 
+
 
     return (
         <div className={styles.Input}>
-            <label className={styles.Label}>{props.elementLabel}</label>
-            {inputElement}
+            {content}
         </div>
     )
 }

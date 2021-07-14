@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import styles from "./Auth.module.scss";
 
-import { checkValidity, authFormInitialState, authAttemptErrorMap } from '../../common/utility';
+import { checkValidity, loginFormInitialState, signUpFormIntialState, authAttemptErrorMap } from '../../common/utility';
 
 import AuthForm from '../../_components/AuthForm/AuthForm';
 import ErrorModal from "../../_components/UI/ErrorModal/ErrorModal";
@@ -15,10 +15,10 @@ import { useHistory } from 'react-router';
 export default function Login() {
 
 
-    const [loginFormConfig, setLoginFormConfig] = useState(JSON.parse(JSON.stringify(authFormInitialState)));
+    const [loginFormConfig, setLoginFormConfig] = useState(loginFormInitialState);
     const [loginFormLoading, setLoginFormLoading] = useState(false);
 
-    const [signupFormConfig, setSignupFormConfig] = useState(JSON.parse(JSON.stringify(authFormInitialState)));
+    const [signupFormConfig, setSignupFormConfig] = useState(signUpFormIntialState);
     const [signupFormLoading, setSignupFormLoading] = useState(false);
 
     const [formError, setFormError] = useState(null);
@@ -32,10 +32,12 @@ export default function Login() {
 
         const existing_config = type === "login" ? loginFormConfig : signupFormConfig;
 
+        const target_value = e.target.type === "checkbox" ? e.target.checked : e.target.value;
+
         const updatedConfig = {...existing_config};
-        updatedConfig[controlName].value = e.target.value;
-        updatedConfig[controlName].valid = checkValidity(e.target.value, updatedConfig[controlName].validation);
-        
+        updatedConfig[controlName].value = target_value;
+        updatedConfig[controlName].valid = checkValidity(target_value, updatedConfig[controlName].validation);
+
         if(type === "login") { 
             setLoginFormConfig(updatedConfig);
         } else {

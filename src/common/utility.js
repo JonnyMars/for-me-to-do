@@ -1,6 +1,6 @@
 export const FIREBASE_WEB_KEY = `AIzaSyBqma4UGNbC2yo_KkJN9yklhALa_X8CEWQ`;
 
-export const authFormInitialState = {
+export const loginFormInitialState = {
     email: {
         elementType: "input",
         label: "Your Email Address",
@@ -33,13 +33,31 @@ export const authFormInitialState = {
     }
 }
 
+export const signUpFormIntialState = {
+    ...JSON.parse(JSON.stringify(loginFormInitialState)),
+    privacy: {
+        elementType: "input",
+        elementConfig: {
+            type: "checkbox",
+        },
+        label: "by signing up you agree to our privacy policy.",
+        labelLast: true,
+        value: "",
+        validation: {
+            required: true
+        },
+        valid: false
+    }
+}
+
 
 export function checkValidity(value, rules) {
 
     let isValid = true;
 
     if(rules.required) {
-        isValid = value.trim() !== "" && isValid;
+        isValid = (value === true && isValid) || (value.toString().trim() !== "" && isValid);
+        if(!value) isValid = false;
     }
 
     if(rules.minLength) {

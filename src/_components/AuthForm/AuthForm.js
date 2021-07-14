@@ -9,6 +9,7 @@ export default function AuthForm(props) {
     let allValid = false;
     
     const validFormElements = props.formElements.filter(formElement => formElement.config.valid === true);
+    console.log(validFormElements, props.formElements.length)
 
     if(validFormElements.length === props.formElements.length) allValid = true;
 
@@ -32,6 +33,7 @@ export default function AuthForm(props) {
                         elementConfig={formElement.config.elementConfig}
                         elementLabel={formElement.config.label}
                         value={formElement.config.value}
+                        labelLast={formElement.config.labelLast}
                         change={(e) => props.change(e, formElement.id, props.type)}
                         shouldValidate={formElement.config.validation}
                         valid={formElement.config.valid}
