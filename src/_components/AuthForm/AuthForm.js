@@ -9,7 +9,6 @@ export default function AuthForm(props) {
     let allValid = false;
     
     const validFormElements = props.formElements.filter(formElement => formElement.config.valid === true);
-    console.log(validFormElements, props.formElements.length)
 
     if(validFormElements.length === props.formElements.length) allValid = true;
 

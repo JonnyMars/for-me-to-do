@@ -5,17 +5,17 @@ import styles from "./Input.module.scss";
 export default function Input(props) {
 
     let inputElement = null;
+    let inputTypeClass = null;
     const inputClasses = [styles.InputElement]
 
     if(!props.valid && props.shouldValidate && props.touched) {
         inputClasses.push(styles.Invalid);
     }
 
-    console.log(props.elementType);
-
     switch(props.elementType) {
 
         case("input"):
+            if(props.elementConfig.type) inputTypeClass = styles[props.elementConfig.type]
             inputElement = <input
                             className={inputClasses.join(" ")}
                             {...props.elementConfig}
@@ -47,7 +47,7 @@ export default function Input(props) {
 
 
     return (
-        <div className={styles.Input}>
+        <div className={`${styles.Input} ${inputTypeClass ? inputTypeClass : ""}`}>
             {content}
         </div>
     )

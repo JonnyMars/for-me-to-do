@@ -69,7 +69,7 @@ export default function Login() {
             email: loginFormConfig.email.value,
             password: loginFormConfig.password.value,
             onSuccess: data => {
-                console.log(data);
+                console.log(data)
 
                 setLoginFormLoading(false);
 
@@ -140,7 +140,7 @@ export default function Login() {
     if(currentUser) return <Redirect to="/tasks" />;
 
     return (
-        <div className={`${styles.Auth} container flex flex-center`}>
+        <div className={`${styles.Auth} container flex`}>
             {error}
             <AuthForm
                 type="login"

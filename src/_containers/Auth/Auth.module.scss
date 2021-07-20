@@ -5,6 +5,7 @@
 }
 
 .Auth {
+    align-items: stretch;
     @include up-to-desktop {
         flex-direction: column;
     }
@@ -14,6 +15,7 @@
     font-size: 3em;
     padding: 20px;
     font-weight: bold;
+    align-self: center;
     
     @include up-to-desktop {
         padding: 0px;
