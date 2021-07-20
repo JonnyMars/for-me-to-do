@@ -1,10 +1,20 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ListActionButton from '../../UI/ListActionButton/ListActionButton';
 import styles from "./TaskItem.module.scss";
 
+window.task_blur_timeout = null;
+
 export default function TaskItem(props) {
 
+    let blur_timeout;
     const [mobileActionsOpen, setMobileActionsOpen] = useState(false);
+
+    useEffect(() => {
+
+        return () => {
+            clearTimeout(window.task_blur_timeout)
+        }
+    }, [])
 
     let buttons = null;
 
@@ -49,7 +59,7 @@ export default function TaskItem(props) {
     }
 
     function moreActionsBlurHandler(e) {
-        setTimeout(() => {
+        window.task_blur_timeout = setTimeout(() => {
             setMobileActionsOpen(false);
         }, 100)
     }
