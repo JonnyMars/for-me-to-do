@@ -1,0 +1,24 @@
+.Footer {
+
+    font-size: 1em;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--white);
+    flex-wrap: wrap-reverse;
+    margin-top: 25px;
+
+    a {
+        color: var(--white);
+        font-weight: bold;
+
+        &:hover {
+            text-decoration: none;
+        }
+
+        &:first-child {
+            margin-right: 15px;
+        }
+    }
+
+
+}

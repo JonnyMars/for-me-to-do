@@ -1,4 +1,11 @@
 .Layout {
     min-height: 100vh;
     background-color: var(--orange);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    & > * {
+        width: 100%;
+    }
 }

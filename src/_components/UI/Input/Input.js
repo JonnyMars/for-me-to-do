@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import styles from "./Input.module.scss";
 
 
@@ -38,7 +39,14 @@ export default function Input(props) {
 
     }
 
-    const label = <label className={styles.Label}>{props.elementLabel}</label>;
+    let label = <label className={styles.Label}>{props.elementLabel}</label>;
+
+    if(props.elementLabel.indexOf("privacy policy") > -1) {
+        label = (
+            <label className={styles.Label}>by signing up you agree to our <Link to="/privacy-policy">privacy policy</Link>.</label>
+        )
+    }
+
     
     let content = (<>{label}{inputElement}</>)
     if(props.labelLast) {
