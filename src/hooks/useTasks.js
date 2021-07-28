@@ -141,7 +141,6 @@ function tasksHttp({
     )
     .then(response => response.json())
     .then(data => {
-        console.log("DATA", data);
         if(data && data.error) {
             SET_ERROR(data.error);
             return;
@@ -152,7 +151,6 @@ function tasksHttp({
 
     })
     .catch(error => {
-        console.log("ERROR", error);
         SET_ERROR(error)
         errorCallback(error)
     })

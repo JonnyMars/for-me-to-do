@@ -69,7 +69,6 @@ export default function Login() {
             email: loginFormConfig.email.value,
             password: loginFormConfig.password.value,
             onSuccess: data => {
-                console.log(data)
 
                 setLoginFormLoading(false);
 
@@ -91,7 +90,6 @@ export default function Login() {
             email: signupFormConfig.email.value,
             password: signupFormConfig.password.value,
             onSuccess: data => {
-                console.log(data);
 
                 setSignupFormLoading(false);
 

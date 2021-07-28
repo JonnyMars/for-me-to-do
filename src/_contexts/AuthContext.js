@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 
 import { FIREBASE_WEB_KEY } from "../common/utility";
 
@@ -16,7 +16,6 @@ export function useAuth() {
 export function AuthProvider({children}) {
 
     const [currentUser, setCurrentUser] = useState(authDetails());
-    console.log({currentUser});
 
     function signUp({email, password, onSuccess, onFail}) {
 
@@ -60,7 +59,7 @@ export function AuthProvider({children}) {
             })
             .then(response => response.json())
             .then(data => {
-                console.log(data);
+
                 if(data.idToken) window.localStorage.setItem(FIREBASE_ID_TOKEN, data.idToken);
                 if(data.localId) window.localStorage.setItem(FIREBASE_UID_TOKEN, data.localId);
                 if(data.expiresIn) {
@@ -99,7 +98,8 @@ export function AuthProvider({children}) {
             expirationDate = new Date(expirationDate);
     
             if(expirationDate <= new Date()) {
-                refreshAuth();
+                // refreshAuth();
+                logOut();
             } else {
                 checkAuthTimeout( (expirationDate.getTime() - new Date().getTime()) / 1000 );
                 setCurrentUser(authDetails())
@@ -109,32 +109,32 @@ export function AuthProvider({children}) {
     
     }
 
-    function refreshAuth() {
+    // function refreshAuth() {
 
-        const {refreshToken} = authDetails();
+    //     const {refreshToken} = authDetails();
     
-        fetch(`https://securetoken.googleapis.com/v1/token?key=${FIREBASE_WEB_KEY}`, {
-            method:"POST",
-            body: JSON.stringify({
-                grant_type: "refresh_token",
-                refresh_token: refreshToken
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log("REFRESH");
-            if(data.id_token) window.localStorage.setItem(FIREBASE_ID_TOKEN, data.id_token);
-            if(data.user_id) window.localStorage.setItem(FIREBASE_UID_TOKEN, data.user_id);
-            if(data.expires_in) {
-                const expirationDate = new Date(new Date().getTime() + (data.expires_in * 1000));
-                window.localStorage.setItem(FIREBASE_EXPIRY_TIME, expirationDate);
-                checkAuthTimeout(data.expires_in)
-            }
-            if(data.refresh_token) window.localStorage.setItem(FIREBASE_REFRESH_TOKEN, data.refresh_token);
-            setCurrentUser(authDetails())
-        })
+    //     fetch(`https://securetoken.googleapis.com/v1/token?key=${FIREBASE_WEB_KEY}`, {
+    //         method:"POST",
+    //         body: JSON.stringify({
+    //             grant_type: "refresh_token",
+    //             refresh_token: refreshToken
+    //         })
+    //     })
+    //     .then(response => response.json())
+    //     .then(data => {
+
+    //         if(data.id_token) window.localStorage.setItem(FIREBASE_ID_TOKEN, data.id_token);
+    //         if(data.user_id) window.localStorage.setItem(FIREBASE_UID_TOKEN, data.user_id);
+    //         if(data.expires_in) {
+    //             const expirationDate = new Date(new Date().getTime() + (data.expires_in * 1000));
+    //             window.localStorage.setItem(FIREBASE_EXPIRY_TIME, expirationDate);
+    //             checkAuthTimeout(data.expires_in)
+    //         }
+    //         if(data.refresh_token) window.localStorage.setItem(FIREBASE_REFRESH_TOKEN, data.refresh_token);
+    //         setCurrentUser(authDetails())
+    //     })
     
-    }
+    // }
 
     function authDetails() {
 
@@ -155,13 +155,12 @@ export function AuthProvider({children}) {
     }
 
     function checkAuthTimeout(expirationTime) {
-        console.log(expirationTime)
+
         setTimeout(() => {
             logOut();
             setCurrentUser(null)
         }, expirationTime * 1000)
         
-        console.log("EXPIRES AT: ", new Date(new Date().getTime() + (expirationTime * 1000)))
     }
 
     function logOut(cb) {
