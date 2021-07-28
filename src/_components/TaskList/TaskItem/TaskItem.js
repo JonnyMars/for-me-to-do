@@ -6,13 +6,13 @@ window.task_blur_timeout = null;
 
 export default function TaskItem(props) {
 
-    let blur_timeout;
+    
     const [mobileActionsOpen, setMobileActionsOpen] = useState(false);
 
     useEffect(() => {
 
         return () => {
-            clearTimeout(window.task_blur_timeout)
+            if(window.task_blur_timeout) clearTimeout(window.task_blur_timeout)
         }
     }, [])
 

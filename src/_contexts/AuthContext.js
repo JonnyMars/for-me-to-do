@@ -76,39 +76,6 @@ export function AuthProvider({children}) {
     
     }
 
-    function authCheckState() {
-
-        const authDetails = authDetails();
-
-        if(!authDetails) {
-            logOut();
-            setCurrentUser(null)
-            return;
-        }
-
-        const {token, userId, expirationDate: _expirationDate, refreshToken} = authDetails;
-    
-        let expirationDate = _expirationDate;
-    
-        if(!token || !userId || !expirationDate || !refreshToken) {
-            logOut();
-            setCurrentUser(null)
-        } else {
-    
-            expirationDate = new Date(expirationDate);
-    
-            if(expirationDate <= new Date()) {
-                // refreshAuth();
-                logOut();
-            } else {
-                checkAuthTimeout( (expirationDate.getTime() - new Date().getTime()) / 1000 );
-                setCurrentUser(authDetails())
-            }
-    
-        }
-    
-    }
-
     // function refreshAuth() {
 
     //     const {refreshToken} = authDetails();
@@ -180,8 +147,7 @@ export function AuthProvider({children}) {
         signUp, 
         logIn,
         logOut,
-        authDetails,
-        authCheckState
+        authDetails
     }
 
     return (

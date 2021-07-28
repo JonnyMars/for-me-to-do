@@ -3,7 +3,7 @@ let SET_TASKS;
 let SET_ERROR;
 let AUTH_DETAILS;
 
-export default (setTasks, setError, authDetails) => {
+export default function useTasks(setTasks, setError, authDetails) {
     
     SET_TASKS = setTasks;
     SET_ERROR = setError;
